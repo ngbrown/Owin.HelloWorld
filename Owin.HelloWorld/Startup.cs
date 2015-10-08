@@ -38,7 +38,7 @@ namespace Owin.HelloWorld
                 })
                 .Get("/razor/model/:name", (req, res) =>
                 {
-                    res.View("Model", new { Name = req.UrlSegments.name });
+                    res.View("Model", new ViewModels.Model { Name = req.UrlSegments.name });
                 })
                 .Get((req, res) =>
                 {
