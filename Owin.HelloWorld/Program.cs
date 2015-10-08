@@ -1,7 +1,5 @@
 ﻿using System;
-using Firefly.Http;
-using Gate.Builder;
-using Owin;
+using Microsoft.Owin.Hosting;
 
 namespace Owin.HelloWorld
 {
@@ -9,13 +7,17 @@ namespace Owin.HelloWorld
     {
         static void Main(string[] args)
         {
-            var app = new AppBuilder().Build(Startup.Configuration);
+            var options = new StartOptions
+            {
+                ServerFactory = "Nowin",
+                Port = 1337
+            };
 
-            var server = new ServerFactory().Create(app, 1337);
-
-            Console.WriteLine("Running on http://localhost:1337");
-
-            Console.ReadLine();
+            using (WebApp.Start<Startup>(options))
+            {
+                Console.WriteLine("Running on http://localhost:1337");
+                Console.ReadLine();
+            }
         }
     }
 }

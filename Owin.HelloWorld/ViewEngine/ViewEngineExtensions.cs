@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
-using Gate;
-using RazorEngine;
+using Microsoft.Owin;
 
 namespace Owin.HelloWorld.ViewEngine
 {
@@ -25,42 +23,42 @@ namespace Owin.HelloWorld.ViewEngine
             return builder;
         }
 
-        public static void View(this Response res, string view)
+        public static void View(this IOwinResponse res, string view)
         {
             var output = ViewEngineActivator.DefaultViewEngine.Parse(view);
 
             res.ContentType = "text/html";
-            res.Status = "200 OK";
-            res.End(output);
+            res.StatusCode = 200;
+            res.Write(output);
         }
 
-        public static void View(this Response res, string view, string viewEngineId)
+        public static void View(this IOwinResponse res, string view, string viewEngineId)
         {
             var viewEngine = ViewEngineActivator.ResolveViewEngine(viewEngineId);
             var output = viewEngine.Parse(view);
 
             res.ContentType = "text/html";
-            res.Status = "200 OK";
-            res.End(output);
+            res.StatusCode = 200;
+            res.Write(output);
         }
 
-        public static void View<T>(this Response res, string view, T model)
+        public static void View<T>(this IOwinResponse res, string view, T model)
         {
             var output = ViewEngineActivator.DefaultViewEngine.Parse(view, model);
 
             res.ContentType = "text/html";
-            res.Status = "200 OK";
-            res.End(output);
+            res.StatusCode = 200;
+            res.Write(output);
         }
 
-        public static void View<T>(this Response res, string view, T model, string viewEngineId)
+        public static void View<T>(this IOwinResponse res, string view, T model, string viewEngineId)
         {
             var viewEngine = ViewEngineActivator.ResolveViewEngine(viewEngineId);
             var output = viewEngine.Parse(view);
 
             res.ContentType = "text/html";
-            res.Status = "200 OK";
-            res.End(output);
+            res.StatusCode = 200;
+            res.Write(output);
         }
     }
 }

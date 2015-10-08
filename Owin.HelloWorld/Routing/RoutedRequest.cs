@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Gate;
+using Microsoft.Owin;
 
 namespace Owin.HelloWorld.Routing
 {
-    public class RoutedRequest : Request
+    public class RoutedRequest : OwinRequest
     {
         public RoutedRequest(IDictionary<string, object> env, Regex regex, string path):
             base(env)

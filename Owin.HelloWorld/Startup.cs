@@ -1,7 +1,5 @@
-﻿using Owin;
-using Owin.HelloWorld.Routing;
+﻿using Owin.HelloWorld.Routing;
 using Owin.HelloWorld.ViewEngine;
-using Gate;
 
 namespace Owin.HelloWorld
 {
@@ -14,17 +12,17 @@ namespace Owin.HelloWorld
                 .Get("/hi", (req, res) =>
                 {
                     res.ContentType = "text/plain";
-                    res.End("Oh hi there, I'm a different route\r\n");
+                    res.Write("Oh hi there, I'm a different route\r\n");
                 })
                 .Get(@"/users/(?<id>\d{1,5})/subscribed/:email", (req, res) =>
                 {
                     res.ContentType = "text/plain";
-                    res.End("Email " + req.UrlSegments.email + " is subscribed.\r\n");
+                    res.Write("Email " + req.UrlSegments.email + " is subscribed.\r\n");
                 })
                 .Delete(@"/users/(?<id>\d{1,5})/unsubscribe/:email", (req, res) =>
                 {
                     res.ContentType = "text/plain";
-                    res.End("Email " + req.UrlSegments.email + " has been unsubscribed.\r\n");
+                    res.Write("Email " + req.UrlSegments.email + " has been unsubscribed.\r\n");
                 })
                 .Get("/json", (req, res) =>
                 {
